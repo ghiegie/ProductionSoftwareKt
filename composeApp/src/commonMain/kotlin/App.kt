@@ -31,7 +31,6 @@ fun App(
 	height: Float,
 	modifier: Modifier = Modifier
 ) {
-	var customerFormData by rememberSaveable { mutableStateOf(CustomerFormData()) }
 
 	Column(
 		modifier = Modifier.fillMaxSize().padding(5.dp),
@@ -48,15 +47,10 @@ fun App(
 				bottom = 15.dp
 			),
 			labelModifier = Modifier.fillMaxWidth(0.15f),
-			textFieldVal = customerFormData.customerID,
-		) {customerFormData.custIDChange()}
+			textFieldVal = "",
+		) {}
 
-		CustomerContent(
-//			custName = Pair(customerFormData.customerName) {
-//				customerFormData = customerFormData.copy(customerName = it)
-//				println(customerFormData)
-//			}
-		)
+		CustomerContent()
 
 		Spacer(Modifier.padding(10.dp))
 

@@ -36,15 +36,7 @@ import enums.LabelWithTextBoxFormat
 import models.CustomerFormData
 
 @Composable
-fun CustomerContent(
-//	custName: Pair<String, (String) -> Unit>,
-//	addr: Pair<String, () -> Unit>,
-//	delivAddr: Pair<String, () -> Unit>,
-//	tin: Pair<String, () -> Unit>,
-//	telNo: Pair<String, () -> Unit>,
-//	cellNo: Pair<String, () -> Unit>,
-//	email: Pair<String, () -> Unit>,
-) {
+fun CustomerContent() {
 	Surface(
 		border = BorderStroke(width = 1.dp, color = Color.LightGray)
 	) {
