@@ -73,10 +73,6 @@ android {
         debugImplementation(libs.compose.ui.tooling)
     }
 }
-dependencies {
-	implementation(libs.androidx.lifecycle.viewmodel.compose)
-	implementation(libs.androidx.lifecycle.viewmodel.ktx)
-}
 
 compose.desktop {
     application {
