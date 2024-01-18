@@ -32,6 +32,7 @@ kotlin {
             implementation(compose.ui)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
+            implementation(libs.mssql.jdbc)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -74,6 +75,7 @@ android {
 }
 dependencies {
 	implementation(libs.androidx.lifecycle.viewmodel.compose)
+	implementation(libs.androidx.lifecycle.viewmodel.ktx)
 }
 
 compose.desktop {

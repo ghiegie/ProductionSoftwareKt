@@ -24,8 +24,9 @@ fun LabelWithTextBox(
 	modifier: Modifier = Modifier,
 	labelModifier: Modifier = Modifier.fillMaxWidth(fraction = 0.25f),
 	textFieldModifier: Modifier = Modifier.fillMaxWidth(),
+	enabled: Boolean = true,
 	textFieldVal: String,
-	textFieldEventHandler: (String) -> Unit,
+	textFieldEventHandler: (String) -> Unit
 ) {
 	when (format) {
 		LabelWithTextBoxFormat.ROW -> {
@@ -41,6 +42,7 @@ fun LabelWithTextBox(
 				Spacer(Modifier.padding(5.dp))
 
 				BasicTextField(
+					enabled = enabled,
 					singleLine = true,
 					value = textFieldVal,
 					onValueChange = textFieldEventHandler,
@@ -49,7 +51,7 @@ fun LabelWithTextBox(
 						Surface(
 							border = BorderStroke(
 								width = 1.dp,
-								color = Color.Black
+								color = if (enabled) Color.Black else Color.LightGray
 							),
 						) {
 							Row(modifier = Modifier.padding(2.5.dp)) {
@@ -74,6 +76,7 @@ fun LabelWithTextBox(
 				}
 
 				BasicTextField(
+					enabled = enabled,
 					singleLine = true,
 					value = textFieldVal,
 					onValueChange = textFieldEventHandler,
@@ -82,7 +85,7 @@ fun LabelWithTextBox(
 						Surface(
 							border = BorderStroke(
 								width = 1.dp,
-								color = Color.Black
+								color = if (enabled) Color.Black else Color.LightGray
 							),
 						) {
 							Row(modifier = Modifier.padding(2.5.dp)) {

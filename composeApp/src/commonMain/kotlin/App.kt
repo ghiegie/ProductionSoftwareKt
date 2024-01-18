@@ -1,36 +1,52 @@
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogWindow
+import androidx.compose.ui.window.rememberDialogState
 import composables.customerform.ButtonsArray
 import composables.customerform.ContactsContent
 import composables.customerform.CustomerContent
 import composables.customerform.LabelWithTextBox
 import composables.customerform.TitleLabel
-import enums.LabelWithTextBoxFormat
-import models.CustomerFormData
+import enums.customerform.CustomerFormDialogEnum
+import models.customerform.CustomerFormData
+import models.customerform.CustomerWindowModel
+import kotlin.system.exitProcess
 
 @Composable
 fun App(
 	width: Float,
 	height: Float,
-	modifier: Modifier = Modifier
+	modifier: Modifier = Modifier,
+	windowState: CustomerWindowModel,
 ) {
+	val customerFormData = rememberSaveable { CustomerFormData() }
+
+	val test = windowState.pos.x
+
+	if (windowState.showDialogType == CustomerFormDialogEnum.SQL_OPERATION_ERROR) {
+		DialogWindow(
+			onCloseRequest = {
+				windowState.showDialogType = CustomerFormDialogEnum.NO_DIALOG
+			},
+		) {
+			Button(
+				onClick = {
+					windowState.showDialogType = CustomerFormDialogEnum.NO_DIALOG
+					println(test)
+				}
+			) {Text("Close Me")}
+		}
+	}
 
 	Column(
 		modifier = Modifier.fillMaxSize().padding(5.dp),
@@ -47,18 +63,18 @@ fun App(
 				bottom = 15.dp
 			),
 			labelModifier = Modifier.fillMaxWidth(0.15f),
-			textFieldVal = "",
-		) {}
+			textFieldVal = customerFormData.id,
+		) { customerFormData.id = it }
 
-		CustomerContent()
+		CustomerContent(customerFormData)
 
 		Spacer(Modifier.padding(10.dp))
 
-		ContactsContent()
+		ContactsContent(customerFormData)
 
 		Spacer(Modifier.padding(5.dp))
 
-		ButtonsArray()
+		ButtonsArray(customerFormData, windowState)
 	}
 }
 

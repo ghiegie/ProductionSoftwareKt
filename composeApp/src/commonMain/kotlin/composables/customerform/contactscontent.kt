@@ -8,17 +8,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import models.customerform.CustomerFormData
 
 @Composable
-fun ContactsContent() {
+fun ContactsContent(custForm: CustomerFormData) {
 	Surface(
 		border = BorderStroke(
 			width = 1.dp,
@@ -29,46 +26,41 @@ fun ContactsContent() {
 			Row(
 				verticalAlignment = Alignment.CenterVertically
 			) {
-				var text9 by rememberSaveable { mutableStateOf("") }
 				LabelWithTextBox(
 					label = "Contact Person",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = text9,
-				) {text9 = it}
+					textFieldVal = custForm.contPers,
+				) { custForm.contPers = it }
 
-				var text10 by rememberSaveable { mutableStateOf("") }
 				LabelWithTextBox(
 					label = "Position",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = text10,
-				) {text10 = it}
+					textFieldVal = custForm.contPersPos,
+				) { custForm.contPersPos = it }
 			}
 
 			Row(
 				verticalAlignment = Alignment.CenterVertically
 			) {
-				var text11 by rememberSaveable { mutableStateOf("") }
 				LabelWithTextBox(
 					label = "Telephone Number",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = text11,
-				) {text11 = it}
+					textFieldVal = custForm.contPersTelNo,
+				) { custForm.contPersTelNo = it }
 
-				var text12 by rememberSaveable { mutableStateOf("") }
 				LabelWithTextBox(
 					label = "Cellphone Number",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = text12,
-				) {text12 = it}
+					textFieldVal = custForm.contPersCellNo,
+				) { custForm.contPersCellNo = it}
 			}
 
 			Row(verticalAlignment = Alignment.CenterVertically) {
-				var text13 by rememberSaveable { mutableStateOf("") }
 				LabelWithTextBox(
 					label = "Email",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = text13,
-				) {text13 = it}
+					textFieldVal = custForm.contPersEmail,
+				) { custForm.contPersEmail = it }
 
 				Spacer(Modifier.fillMaxWidth(fraction = 0.5f))
 			}

@@ -17,9 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import enums.customerform.CustomerFormDialogEnum
+import models.customerform.CustomerFormData
+import models.customerform.CustomerWindowModel
+import kotlin.system.exitProcess
 
 @Composable
-fun ButtonsArray() {
+fun ButtonsArray(customerFormData: CustomerFormData, windowModel: CustomerWindowModel) {
 	Row(
 		modifier = Modifier.fillMaxWidth().height(30.dp),
 		horizontalArrangement = Arrangement.End,
@@ -32,7 +36,9 @@ fun ButtonsArray() {
 			Text(
 				text = "Cancel",
 				textAlign = TextAlign.Center,
-				modifier = Modifier.width(100.dp).clickable(onClick = {}).padding(5.dp)
+				modifier = Modifier.width(100.dp).clickable(onClick = {
+					exitProcess(0)
+				}).padding(5.dp)
 			)
 		}
 
@@ -45,7 +51,9 @@ fun ButtonsArray() {
 			Text(
 				text = "Clear",
 				textAlign = TextAlign.Center,
-				modifier = Modifier.width(100.dp).clickable(onClick = {}).padding(5.dp)
+				modifier = Modifier.width(100.dp).clickable(onClick = {
+					customerFormData.clear()
+				}).padding(5.dp)
 			)
 		}
 
@@ -58,7 +66,9 @@ fun ButtonsArray() {
 			Text(
 				text = "Submit",
 				textAlign = TextAlign.Center,
-				modifier = Modifier.width(100.dp).clickable(onClick = {}).padding(5.dp)
+				modifier = Modifier.width(100.dp).clickable(onClick = {
+					windowModel.showDialogType = CustomerFormDialogEnum.SQL_OPERATION_ERROR
+				}).padding(5.dp)
 			)
 		}
 	}
