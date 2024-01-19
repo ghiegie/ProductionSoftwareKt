@@ -31,7 +31,6 @@ import kotlin.system.exitProcess
 @Composable
 fun ButtonsArray(
 	customerFormModel: CustomerFormModel,
-	windowState: WindowState,
 	modifier: Modifier = Modifier
 ) {
 	Row(
@@ -76,25 +75,13 @@ fun ButtonsArray(
 			color = Color.Black
 		)
 		) {
-			var showSubmitErrorDialog by rememberSaveable { mutableStateOf(false) }
-
 			Text(
 				text = "Submit",
 				textAlign = TextAlign.Center,
 				modifier = Modifier.width(100.dp).clickable(onClick = {
-					showSubmitErrorDialog = !customerFormModel.submit()
-					println(showSubmitErrorDialog)
+
 				}).padding(5.dp)
 			)
-
-			if (showSubmitErrorDialog) {
-				DialogWindow(
-					onCloseRequest = { showSubmitErrorDialog = false },
-					state = rememberDialogState()
-				) {
-
-				}
-			}
 		}
 	}
 }
