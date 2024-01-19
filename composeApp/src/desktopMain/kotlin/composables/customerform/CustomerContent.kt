@@ -20,31 +20,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
-import enums.LabelWithTextBoxFormat
-import models.customerform.CustomerFormData
+import enums.customerform.LabelWithTextBoxFormat
+import model.customerform.CustomerFormModel
 
 @Composable
 fun CustomerContent(
-	custFormData: CustomerFormData
+	customerFormModel: CustomerFormModel,
+	modifier: Modifier = Modifier
 ) {
-	Surface(
-		border = BorderStroke(width = 1.dp, color = Color.LightGray)
-	) {
-		Column(modifier = Modifier.padding(5.dp)) {
+	Surface(border = BorderStroke(
+		width = 1.dp,
+		color = Color.LightGray
+	)) {
+		Column(modifier = modifier.padding(5.dp)) {
 			LabelWithTextBox(
 				label = "Customer Name",
 				modifier = Modifier.fillMaxWidth().padding(2.5.dp),
 				labelModifier = Modifier.fillMaxWidth(0.15f),
-				textFieldVal = custFormData.name
-			) { custFormData.name = it }
+				textFieldModifier = Modifier.fillMaxWidth(),
+				textFieldVal = customerFormModel.name,
+			) { customerFormModel.name = it }
 
 			LabelWithTextBox(
 				format = LabelWithTextBoxFormat.COLUMN,
 				label = "Customer Address",
 				modifier = Modifier.fillMaxWidth().padding(2.5.dp),
 				labelModifier = Modifier.fillMaxWidth(0.15f),
-				textFieldVal = custFormData.addr,
-			) { custFormData.addr = it }
+				textFieldVal = customerFormModel.addr,
+			) { customerFormModel.addr = it }
 
 			LabelWithTextBox(
 				format = LabelWithTextBoxFormat.COLUMN,
@@ -59,11 +62,11 @@ fun CustomerContent(
 								color = Color.Black
 							),
 							modifier = Modifier.size(15.dp).clickable {
-								custFormData.delivAddr = ""
-								custFormData.isChecked = !custFormData.isChecked
+								customerFormModel.delivAddr = ""
+								customerFormModel.isChecked = !customerFormModel.isChecked
 							}
 						) {
-							if (custFormData.isChecked) {
+							if (customerFormModel.isChecked) {
 								Icon(
 									imageVector = Icons.Filled.Check,
 									contentDescription = null
@@ -81,12 +84,12 @@ fun CustomerContent(
 						)
 					}
 				},
-				enabled = !custFormData.isChecked,
+				enabled = !customerFormModel.isChecked,
 				label = "Delivery Address",
 				modifier = Modifier.fillMaxWidth().padding(2.5.dp),
 				labelModifier = Modifier.fillMaxWidth(0.15f),
-				textFieldVal = custFormData.delivAddr,
-			) { custFormData.delivAddr = it }
+				textFieldVal = customerFormModel.delivAddr,
+			) { customerFormModel.delivAddr = it }
 
 			Row(
 				verticalAlignment = Alignment.CenterVertically
@@ -94,14 +97,14 @@ fun CustomerContent(
 				LabelWithTextBox(
 					label = "TIN",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custFormData.tin,
-				) { custFormData.tin = it }
+					textFieldVal = customerFormModel.tin,
+				) { customerFormModel.tin = it }
 
 				LabelWithTextBox(
 					label = "Telephone Number",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custFormData.telNo,
-				) { custFormData.telNo = it }
+					textFieldVal = customerFormModel.telNo,
+				) { customerFormModel.telNo = it }
 			}
 
 			Row(
@@ -110,14 +113,14 @@ fun CustomerContent(
 				LabelWithTextBox(
 					label = "Email",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custFormData.email,
-				) { custFormData.email = it }
+					textFieldVal = customerFormModel.email,
+				) { customerFormModel.email = it }
 
 				LabelWithTextBox(
 					label = "Cellphone Number",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custFormData.cellNo,
-				) { custFormData.cellNo = it }
+					textFieldVal = customerFormModel.cellNo,
+				) { customerFormModel.cellNo = it }
 			}
 		}
 	}

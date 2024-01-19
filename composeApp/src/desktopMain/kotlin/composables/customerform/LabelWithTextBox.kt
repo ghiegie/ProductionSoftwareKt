@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import enums.LabelWithTextBoxFormat
+import enums.customerform.LabelWithTextBoxFormat
 
 @Composable
 fun LabelWithTextBox(
@@ -62,6 +62,7 @@ fun LabelWithTextBox(
 				)
 			}
 		}
+
 		LabelWithTextBoxFormat.COLUMN -> {
 			Column(modifier = modifier) {
 				Row (
@@ -71,7 +72,9 @@ fun LabelWithTextBox(
 					Text(
 						text = label,
 					)
+
 					Spacer(modifier = Modifier.padding(5.dp))
+
 					modForColumnFormat()
 				}
 

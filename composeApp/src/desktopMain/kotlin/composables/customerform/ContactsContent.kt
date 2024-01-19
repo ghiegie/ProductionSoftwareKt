@@ -12,31 +12,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import models.customerform.CustomerFormData
+import model.customerform.CustomerFormModel
 
 @Composable
-fun ContactsContent(custForm: CustomerFormData) {
+fun ContactsContent(
+	customerFormModel: CustomerFormModel,
+	modifier: Modifier = Modifier
+) {
 	Surface(
 		border = BorderStroke(
 			width = 1.dp,
 			color = Color.LightGray
 		)
 	) {
-		Column(modifier = Modifier.padding(5.dp)) {
+		Column(modifier = modifier.padding(5.dp)) {
 			Row(
 				verticalAlignment = Alignment.CenterVertically
 			) {
 				LabelWithTextBox(
 					label = "Contact Person",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custForm.contPers,
-				) { custForm.contPers = it }
+					textFieldVal = customerFormModel.contPers,
+				) { customerFormModel.contPers = it }
 
 				LabelWithTextBox(
 					label = "Position",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custForm.contPersPos,
-				) { custForm.contPersPos = it }
+					textFieldVal = customerFormModel.contPersPos,
+				) { customerFormModel.contPersPos = it }
 			}
 
 			Row(
@@ -45,22 +48,22 @@ fun ContactsContent(custForm: CustomerFormData) {
 				LabelWithTextBox(
 					label = "Telephone Number",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custForm.contPersTelNo,
-				) { custForm.contPersTelNo = it }
+					textFieldVal = customerFormModel.contPersTelNo,
+				) { customerFormModel.contPersTelNo = it }
 
 				LabelWithTextBox(
 					label = "Cellphone Number",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custForm.contPersCellNo,
-				) { custForm.contPersCellNo = it}
+					textFieldVal = customerFormModel.contPersCellNo,
+				) { customerFormModel.contPersCellNo = it}
 			}
 
 			Row(verticalAlignment = Alignment.CenterVertically) {
 				LabelWithTextBox(
 					label = "Email",
 					modifier = Modifier.weight(0.5f).padding(2.5.dp),
-					textFieldVal = custForm.contPersEmail,
-				) { custForm.contPersEmail = it }
+					textFieldVal = customerFormModel.contPersEmail,
+				) { customerFormModel.contPersEmail = it }
 
 				Spacer(Modifier.fillMaxWidth(fraction = 0.5f))
 			}

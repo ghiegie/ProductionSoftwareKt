@@ -1,14 +1,11 @@
-package models.customerform
+package model.customerform
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.microsoft.sqlserver.jdbc.SQLServerConnectionPoolDataSource
-import com.microsoft.sqlserver.jdbc.SQLServerDataSource
-import java.sql.DriverManager
 import java.sql.SQLException
 
-class CustomerFormData {
+class CustomerFormModel {
 	var id by mutableStateOf("")
 	var name by mutableStateOf("")
 	var addr by mutableStateOf("")

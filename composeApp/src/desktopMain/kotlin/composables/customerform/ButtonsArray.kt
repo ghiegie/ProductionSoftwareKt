@@ -12,27 +12,38 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import enums.customerform.CustomerFormDialogEnum
-import models.customerform.CustomerFormData
-import models.customerform.CustomerWindowModel
+import androidx.compose.ui.window.DialogWindow
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.WindowState
+import androidx.compose.ui.window.rememberDialogState
+import model.customerform.CustomerFormModel
 import kotlin.system.exitProcess
 
 @Composable
-fun ButtonsArray(customerFormData: CustomerFormData, windowModel: CustomerWindowModel) {
+fun ButtonsArray(
+	customerFormModel: CustomerFormModel,
+	windowState: WindowState,
+	modifier: Modifier = Modifier
+) {
 	Row(
-		modifier = Modifier.fillMaxWidth().height(30.dp),
+		modifier = modifier.fillMaxWidth().height(30.dp),
 		horizontalArrangement = Arrangement.End,
 		verticalAlignment = Alignment.CenterVertically
 	) {
 		Surface(border = BorderStroke(
 			width = 1.dp,
 			color = Color.Black
-		)) {
+		)
+		) {
 			Text(
 				text = "Cancel",
 				textAlign = TextAlign.Center,
@@ -47,12 +58,13 @@ fun ButtonsArray(customerFormData: CustomerFormData, windowModel: CustomerWindow
 		Surface(border = BorderStroke(
 			width = 1.dp,
 			color = Color.Black
-		)) {
+		)
+		) {
 			Text(
 				text = "Clear",
 				textAlign = TextAlign.Center,
 				modifier = Modifier.width(100.dp).clickable(onClick = {
-					customerFormData.clear()
+					customerFormModel.clear()
 				}).padding(5.dp)
 			)
 		}
@@ -62,14 +74,27 @@ fun ButtonsArray(customerFormData: CustomerFormData, windowModel: CustomerWindow
 		Surface(border = BorderStroke(
 			width = 1.dp,
 			color = Color.Black
-		)) {
+		)
+		) {
+			var showSubmitErrorDialog by rememberSaveable { mutableStateOf(false) }
+
 			Text(
 				text = "Submit",
 				textAlign = TextAlign.Center,
 				modifier = Modifier.width(100.dp).clickable(onClick = {
-					windowModel.showDialogType = CustomerFormDialogEnum.SQL_OPERATION_ERROR
+					showSubmitErrorDialog = !customerFormModel.submit()
+					println(showSubmitErrorDialog)
 				}).padding(5.dp)
 			)
+
+			if (showSubmitErrorDialog) {
+				DialogWindow(
+					onCloseRequest = { showSubmitErrorDialog = false },
+					state = rememberDialogState()
+				) {
+
+				}
+			}
 		}
 	}
 }
