@@ -22,17 +22,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogWindow
-import androidx.compose.ui.window.WindowPosition
-import androidx.compose.ui.window.WindowState
-import androidx.compose.ui.window.rememberDialogState
 import model.customerform.CustomerFormModel
 import kotlin.system.exitProcess
 
 @Composable
 fun ButtonsArray(
 	customerFormModel: CustomerFormModel,
-	modifier: Modifier = Modifier
+	modifier: Modifier = Modifier,
+	dialogDetails: Pair<Boolean, () -> Unit>
 ) {
+	if (dialogDetails.first) {
+		DialogWindow(
+			onCloseRequest = dialogDetails.second
+		) {}
+	}
+
 	Row(
 		modifier = modifier.fillMaxWidth().height(30.dp),
 		horizontalArrangement = Arrangement.End,
@@ -79,7 +83,7 @@ fun ButtonsArray(
 				text = "Submit",
 				textAlign = TextAlign.Center,
 				modifier = Modifier.width(100.dp).clickable(onClick = {
-
+					dialogDetails = dialogDetails.copy(first = !customerFormModel.submit())
 				}).padding(5.dp)
 			)
 		}

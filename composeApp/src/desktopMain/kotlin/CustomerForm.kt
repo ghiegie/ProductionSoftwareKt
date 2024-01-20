@@ -20,7 +20,7 @@ import composables.customerform.LabelWithTextBox
 import model.customerform.CustomerFormModel
 
 @Composable
-fun CustomerForm(windowState: WindowState, modifier: Modifier = Modifier) {
+fun CustomerForm(windowState: WindowState, modifier: Modifier = Modifier, dialogDetails: Pair<Boolean, () -> Unit>) {
 	Column(
 		modifier = modifier.fillMaxSize().padding(5.dp),
 		verticalArrangement = Arrangement.Center
@@ -61,6 +61,6 @@ fun CustomerForm(windowState: WindowState, modifier: Modifier = Modifier) {
 
 		Spacer(Modifier.padding(5.dp))
 
-		ButtonsArray(customerFormModel)
+		ButtonsArray(customerFormModel, dialogDetails = dialogDetails)
 	}
 }
